@@ -72,20 +72,19 @@ class ApkFile(private val apkFile: File, private val preferLocale: Locale = Loca
             for (iconPath in iconPaths) {
                 val filePath = iconPath.path
                 if (filePath.endsWith(".xml")) {
-                    val data = fileData(filePath) ?: continue
-
-                    val iconParser = AdaptiveIconParser()
-                    transBinaryXml(data, iconParser)
-                    var backgroundIcon: Icon? = null
-                    if (iconParser.background != null) {
-                        backgroundIcon = fileIcon(iconParser.background, iconPath.density)
-                    }
-                    var foregroundIcon: Icon? = null
-                    if (iconParser.foreground != null) {
-                        foregroundIcon = fileIcon(iconParser.foreground, iconPath.density)
-                    }
-                    val icon = AdaptiveIcon(foregroundIcon, backgroundIcon)
-                    iconFaces.add(icon)
+//                    val data = fileData(filePath) ?: continue
+//                    val iconParser = AdaptiveIconParser()
+//                    transBinaryXml(data, iconParser)
+//                    var backgroundIcon: Icon? = null
+//                    if (iconParser.background != null) {
+//                        backgroundIcon = fileIcon(iconParser.background, iconPath.density)
+//                    }
+//                    var foregroundIcon: Icon? = null
+//                    if (iconParser.foreground != null) {
+//                        foregroundIcon = fileIcon(iconParser.foreground, iconPath.density)
+//                    }
+//                    val icon = AdaptiveIcon(foregroundIcon, backgroundIcon)
+//                    iconFaces.add(icon)
                 } else {
                     val icon = fileIcon(filePath, iconPath.density)
                     iconFaces.add(icon)
@@ -104,10 +103,10 @@ class ApkFile(private val apkFile: File, private val preferLocale: Locale = Loca
             val ip = this.iconPaths.find { it.density == 320 } ?: return null
             return fileIcon(ip.path, ip.density)
         }
-    val appIcon144: ByteArray?
+    val appIcon144: Icon?
         get() {
             val ip = this.iconPaths.find { it.density == 480 } ?: return null
-            return fileData(ip.path)
+            return fileIcon(ip.path, ip.density)
         }
     val appIcon192: Icon?
         get() {
