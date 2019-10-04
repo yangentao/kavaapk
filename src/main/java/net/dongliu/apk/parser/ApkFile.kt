@@ -113,11 +113,11 @@ class ApkFile(private val apkFile: File, private val preferLocale: Locale = Loca
             val ip = this.iconPaths.find { it.density == 640 } ?: return null
             return fileIcon(ip.path, ip.density)
         }
-    val appIconMax: Icon?
-        get() {
-            val ip = this.iconPaths.maxBy { it.density } ?: return null
-            return fileIcon(ip.path, ip.density)
-        }
+//    val appIconMax: Icon?
+//        get() {
+//            val ip = this.iconPaths.maxBy { it.density } ?: return null
+//            return fileIcon(ip.path, ip.density)
+//        }
 
     val appIcons: List<Icon>
         get() {
